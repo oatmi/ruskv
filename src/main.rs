@@ -26,14 +26,14 @@ fn main() {
 
     match &cli.command {
         Commands::set { key, val } => {
-            set(key, val);
+            set(&key[..], &val[..]);
             println!("OK")
         }
         Commands::get { key } => {
-            get(key);
+            get(&key[..]);
         }
         Commands::del { key } => {
-            del(key);
+            del(&key[..]);
             println!("OK")
         }
         Commands::list { } => {

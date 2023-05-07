@@ -2,7 +2,7 @@ use sqlite3;
 use sqlite3::Value;
 use std::env;
 
-pub fn get(key: &String) {
+pub fn get(key: &str) {
     let connection = sqlite3::open(env::var("SQLITE_DB_FILE").unwrap()).unwrap();
 
     let mut cursor = connection
@@ -16,14 +16,14 @@ pub fn get(key: &String) {
     }
 }
 
-pub fn del(key: &String) {
+pub fn del(key: &str) {
     let connection = sqlite3::open(env::var("SQLITE_DB_FILE").unwrap()).unwrap();
     let sql = format!("DELETE from ruskv WHERE key = '{key}'", key=key);
 
     connection.execute(sql).unwrap();
 }
 
-pub fn set(k: &String, v: &String) {
+pub fn set(k: &str, v: &str) {
     let connection = sqlite3::open(env::var("SQLITE_DB_FILE").unwrap()).unwrap();
     let sql = format!("INSERT INTO ruskv (key, val) VALUES ('{key}', '{val}')
                       ON CONFLICT(key) DO UPDATE SET val = '{val}'", key=k, val=v);
